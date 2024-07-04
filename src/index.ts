@@ -25,4 +25,6 @@ app.use(ROOT_PATH, orderRouter)
 
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerSpec))
 
+app.get("/", (req, res) => res.json("it is working"))
+
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
