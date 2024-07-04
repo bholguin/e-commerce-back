@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "ts-node-dev src/index.ts",
     "start": "node --env-file=.env build/index.js",
+    "build": "node --env-file=.env build/index.js",
     "tsc": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
