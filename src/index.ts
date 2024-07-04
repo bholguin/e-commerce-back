@@ -8,6 +8,7 @@ import orderRouter from "./routes/orders";
 
 const app = express()
 const PORT = 3000;
+
 const ROOT_PATH = "/api"
 
 app.use(cors())
