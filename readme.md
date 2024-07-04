@@ -1,0 +1,1 @@
+npx prisma migrate dev => crea la base de datos con respecto a la configuracion de los modelos en prisma 
