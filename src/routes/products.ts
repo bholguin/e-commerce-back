@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { createProduct, deleteProduct, getProduct, getProducts, updateProduct } from "../modules/products";
+import { verifyToken } from "../modules/auth";
 
 const router = Router()
 
@@ -68,7 +69,7 @@ router.get("/product/:id", getProduct)
  *              description: product not found
  */
 
-router.post("/product", createProduct)
+router.post("/product", verifyToken, createProduct)
 /**
  * @swagger
  * /api/product:
@@ -88,7 +89,7 @@ router.post("/product", createProduct)
  *              description: {}
  */
 
-router.delete("/product/:id", deleteProduct)
+router.delete("/product/:id", verifyToken, deleteProduct)
 /**
  * @swagger
  * /api/product/{id}:
@@ -110,7 +111,7 @@ router.delete("/product/:id", deleteProduct)
  *              description: product not found
  */
 
-router.put("/product/:id", updateProduct)
+router.put("/product/:id", verifyToken, updateProduct)
 /**
  * @swagger
  * /api/product/{id}:

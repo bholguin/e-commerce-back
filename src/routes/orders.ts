@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { createOrder, deleteOrder, getOrder, getOrders, updateOrder } from "../modules/order";
+import { verifyToken } from "../modules/auth";
 
 const router = Router()
 
@@ -49,7 +50,7 @@ const router = Router()
  */
 
 
-router.get("/orders", getOrders)
+router.get("/orders", verifyToken, getOrders)
 /**
  * @swagger
  * /api/orders:
@@ -62,7 +63,7 @@ router.get("/orders", getOrders)
  *              description: {}
  */
 
-router.get("/order/:id", getOrder)
+router.get("/order/:id", verifyToken, getOrder)
 /**
  * @swagger
  * /api/order/{id}:
@@ -84,7 +85,7 @@ router.get("/order/:id", getOrder)
  *              description: Order not found
  */
 
-router.post("/order", createOrder)
+router.post("/order", verifyToken, createOrder)
 /**
  * @swagger
  * /api/orders:
@@ -104,7 +105,7 @@ router.post("/order", createOrder)
  *              description: {}
  */
 
-router.delete("/order/:id", deleteOrder)
+router.delete("/order/:id", verifyToken, deleteOrder)
 /**
  * @swagger
  * /api/order/{id}:
@@ -126,7 +127,7 @@ router.delete("/order/:id", deleteOrder)
  *              description: Order not found
  */
 
-router.put("/order/:id", updateOrder)
+router.put("/order/:id", verifyToken, updateOrder)
 /**
  * @swagger
  * /api/orders/{id}:
