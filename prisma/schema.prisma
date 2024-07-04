@@ -10,6 +10,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id Int @id @default(autoincrement())
+  firstname String
+  lastname String
+  username String @unique
+  password String
+  orders Order[]
+}
+
 model Product {
   id Int @id @default(autoincrement())
   name String @unique
@@ -25,6 +34,8 @@ model Order {
   total Decimal
   active Boolean @default(true) 
   products ProductsOnOrder[]
+  userId Int
+  user User @relation(fields: [userId], references: [id])
 }
 
 model ProductsOnOrder {

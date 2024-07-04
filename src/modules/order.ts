@@ -35,7 +35,8 @@ export const createOrder = async (req: Request, res: Response) => {
 
     const order = await prisma.order.create({
         data: {
-            total
+            total,
+            userId: 1
         }
     })
 
