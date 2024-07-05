@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 
 import swaggerSpec from "./swagger";
 import loginRouter from './routes/auth';
+import userRoutes from "./routes/user"
 import productRouter from "./routes/products";
 import orderRouter from "./routes/orders";
 
@@ -14,12 +15,17 @@ const PORT = 3000;
 
 const ROOT_PATH = "/api"
 
-app.use(cors())
+app.use(cors({
+    origin: "*",
+    credentials: true
+}))
+
 app.disable("x-powered-by"); //Reduce fingerprinting
 app.use(cookieParser());
 app.use(express.json())
 
 app.use(ROOT_PATH, loginRouter)
+app.use(ROOT_PATH, userRoutes)
 app.use(ROOT_PATH, productRouter)
 app.use(ROOT_PATH, orderRouter)
 

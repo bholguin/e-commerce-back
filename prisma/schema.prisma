@@ -16,6 +16,7 @@ model User {
   lastname String
   username String @unique
   password String
+  isAdmin Boolean @default(false)
   orders Order[]
 }
 
