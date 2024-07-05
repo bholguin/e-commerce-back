@@ -1,5 +1,6 @@
 import { Router } from "express";
-import { createUser } from "../modules/user";
+import { createUser, getUser } from "../modules/user";
+import { verifyToken } from "../modules/auth";
 
 const router = Router()
 
@@ -56,6 +57,22 @@ router.post("/user", createUser)
  *      responses:
  *          200:
  *              description: {}
+ */
+
+
+router.get("/user", verifyToken, getUser)
+/**
+ * @swagger
+ * /api/user:
+ *  get:
+ *      summary: Obtener el usuario actual
+ *      tags:
+ *          - User
+ *      responses:
+ *          200:
+ *              description: {}
+ *          404:
+ *              description: product not found
  */
 
 

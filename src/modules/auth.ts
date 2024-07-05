@@ -23,6 +23,8 @@ export const login = async (req: Request, res: Response) => {
 
     const user = await prisma.user.findFirst({ where: { username: username } })
     const pass = decrypt(user?.password as string)
+    console.log(pass);
+    
     if (username === user?.username && password === pass) {
       const token = jwt.sign({ id: user?.id }, SECRET_KEY as string, { expiresIn: "1h" });
       let options: any = {
@@ -42,8 +44,10 @@ export const login = async (req: Request, res: Response) => {
 }
 
 export const verifyToken = async(req: UserRequest, res: Response, next: NextFunction) => {
-  const header = req.header("cookie") as string;
+  const header = req.header("cookie") || "";
   const token = header?.split("=")[1];  
+  console.log(token);
+  
   if (!token) {
     return res.status(401).json({ message: "Token not provied" });
   }
