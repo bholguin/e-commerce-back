@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createOrder, deleteOrder, getOrder, getOrders, updateOrder } from "../modules/order";
+import { createOrder, deleteOrder, getOrder, getOrders, getUserOrders, updateOrder } from "../modules/order";
 import { verifyToken } from "../modules/auth";
 
 const router = Router()
@@ -62,6 +62,21 @@ router.get("/orders", verifyToken, getOrders)
  *          200:
  *              description: {}
  */
+
+
+router.get("/user-orders", verifyToken, getUserOrders)
+/**
+ * @swagger
+ * /api/user-orders:
+ *  get:
+ *      summary: Obtener listado de ordenes por usuario
+ *      tags:
+ *          - Order
+ *      responses:
+ *          200:
+ *              description: {}
+ */
+
 
 router.get("/order/:id", verifyToken, getOrder)
 /**

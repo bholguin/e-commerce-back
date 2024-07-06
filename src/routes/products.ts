@@ -47,6 +47,19 @@ router.get("/products", getProducts)
  *              description: {}
  */
 
+router.get("/products-admin", verifyToken, getProducts)
+/**
+ * @swagger
+ * /api/products-admin:
+ *  get:
+ *      summary: Obtener listado de productos para los administradores
+ *      tags:
+ *          - Product
+ *      responses:
+ *          200:
+ *              description: {}
+ */
+
 router.get("/product/:id", getProduct)
 /**
  * @swagger
