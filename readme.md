@@ -1,5 +1,5 @@
 npx prisma migrate dev => crea la base de datos con respecto a la configuracion de los modelos en prisma 
-# e-commerce-front
+# e-commerce-back
 
 Aplicación Backend node para aplicar como Front End developer en LinkTIC
 
