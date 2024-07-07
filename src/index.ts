@@ -8,6 +8,7 @@ import loginRouter from './routes/auth';
 import userRoutes from "./routes/user"
 import productRouter from "./routes/products";
 import orderRouter from "./routes/orders";
+import { errorMiddlewares } from "./middlewares/errors";
 
 
 const app = express()
@@ -23,6 +24,8 @@ app.use(cors({
 app.disable("x-powered-by"); //Reduce fingerprinting
 app.use(cookieParser());
 app.use(express.json())
+
+app.use(errorMiddlewares)
 
 app.use(ROOT_PATH, loginRouter)
 app.use(ROOT_PATH, userRoutes)

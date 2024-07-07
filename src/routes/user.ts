@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { createUser, getUser } from "../modules/user";
 import { verifyToken } from "../modules/auth";
+import { errorHandler } from "../error-handler";
 
 const router = Router()
 
@@ -39,7 +40,7 @@ const router = Router()
 
 
 
-router.post("/user", createUser)
+router.post("/user", errorHandler(createUser))
 /**
  * @swagger
  * /api/user:
@@ -60,11 +61,13 @@ router.post("/user", createUser)
  */
 
 
-router.get("/user", verifyToken, getUser)
+router.get("/user", verifyToken, errorHandler(getUser))
 /**
  * @swagger
  * /api/user:
  *  get:
+ *      security:
+ *        - cookieAuth: []
  *      summary: Obtener el usuario actual
  *      tags:
  *          - User

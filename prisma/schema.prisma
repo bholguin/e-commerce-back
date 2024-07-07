@@ -36,14 +36,14 @@ model Order {
   active Boolean @default(true) 
   products ProductsOnOrder[]
   userId Int
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Restrict)
 }
 
 model ProductsOnOrder {
   productId Int
-  product Product @relation(fields: [productId], references: [id])
+  product Product @relation(fields: [productId], references: [id], onDelete: Restrict)
   orderId Int
-  order Order @relation(fields: [orderId], references: [id])
+  order Order @relation(fields: [orderId], references: [id], onDelete: Restrict)
   amount Decimal @default(0)
   createAt DateTime @default(now())
   @@id([productId, orderId])

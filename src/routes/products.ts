@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { createProduct, deleteProduct, getProduct, getProducts, updateProduct } from "../modules/products";
 import { verifyToken } from "../modules/auth";
+import { errorHandler } from "../error-handler";
 
 const router = Router()
 
@@ -34,7 +35,7 @@ const router = Router()
  */
 
 
-router.get("/products", getProducts)
+router.get("/products", errorHandler(getProducts))
 /**
  * @swagger
  * /api/products:
@@ -47,11 +48,13 @@ router.get("/products", getProducts)
  *              description: {}
  */
 
-router.get("/products-admin", verifyToken, getProducts)
+router.get("/products-admin", verifyToken, errorHandler(getProducts))
 /**
  * @swagger
  * /api/products-admin:
  *  get:
+ *      security:
+ *        - cookieAuth: []
  *      summary: Obtener listado de productos para los administradores
  *      tags:
  *          - Product
@@ -60,11 +63,13 @@ router.get("/products-admin", verifyToken, getProducts)
  *              description: {}
  */
 
-router.get("/product/:id", getProduct)
+router.get("/product/:id", errorHandler(getProduct))
 /**
  * @swagger
  * /api/product/{id}:
  *  get:
+ *      security:
+ *        - cookieAuth: []
  *      summary: Obtener un producto por Id
  *      tags:
  *          - Product
@@ -82,11 +87,13 @@ router.get("/product/:id", getProduct)
  *              description: product not found
  */
 
-router.post("/product", verifyToken, createProduct)
+router.post("/product", verifyToken, errorHandler(createProduct))
 /**
  * @swagger
  * /api/product:
  *  post:
+ *      security:
+ *        - cookieAuth: []
  *      summary: Crear un nueva producto
  *      tags:
  *          - Product
@@ -102,11 +109,13 @@ router.post("/product", verifyToken, createProduct)
  *              description: {}
  */
 
-router.delete("/product/:id", verifyToken, deleteProduct)
+router.delete("/product/:id", verifyToken, errorHandler(deleteProduct))
 /**
  * @swagger
  * /api/product/{id}:
  *  delete:
+ *      security:
+ *        - cookieAuth: []
  *      summary: Eliminar un producto por Id
  *      tags:
  *          - Product
@@ -124,11 +133,13 @@ router.delete("/product/:id", verifyToken, deleteProduct)
  *              description: product not found
  */
 
-router.put("/product/:id", verifyToken, updateProduct)
+router.put("/product/:id", verifyToken, errorHandler(updateProduct))
 /**
  * @swagger
  * /api/product/{id}:
  *  put:
+ *      security:
+ *        - cookieAuth: []
  *      summary: Actualizar un producto
  *      tags:
  *          - Product

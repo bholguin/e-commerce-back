@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
+//import { HttpException } from "../exceptions/root";
 
 const prisma = new PrismaClient()
 
@@ -31,27 +32,29 @@ export const createProduct = async (req: Request, res: Response) => {
 }
 
 
-export const deleteProduct = async (req: Request, res: Response) => {
-    const product = await prisma.product.delete({
-        where: {
-            id: +req.params.id
+export const deleteProduct = async (req: Request, res: Response, next: NextFunction) => {
+ 
+        const product = await prisma.product.delete({
+            where: {
+                id: parseInt(req.params.id)
+            }
+        })
+
+        if (!product) {
+            res.status(404).json("product not found")
         }
-    })
 
-    if (!product) {
-        res.status(404).json("product not found")
+        res.json(product)
+ 
+}
+
+    export const updateProduct = async (req: Request, res: Response) => {
+        const product = await prisma.product.update({
+            where: {
+                id: +req.params.id
+            },
+            data: req.body
+        })
+
+        res.json(product)
     }
-
-    res.json(product)
-}
-
-export const updateProduct = async (req: Request, res: Response) => {
-    const product = await prisma.product.update({
-        where: {
-            id: +req.params.id
-        },
-        data: req.body
-    })
-
-    res.json(product)
-}

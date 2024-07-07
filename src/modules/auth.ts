@@ -4,6 +4,7 @@ import { SECRET_KEY } from "../config"
 import { PrismaClient } from '@prisma/client';
 import { UserRequest } from '../../types';
 import { decrypt } from '../helpers/encrypt-helper';
+import { HttpException } from '../exceptions/root';
 
 const prisma = new PrismaClient()
 
@@ -12,18 +13,15 @@ interface JwtPayloadWithId extends JwtPayload {
 }
 
 export const login = async (req: Request, res: Response) => {
-  try {
-
     const username = req.body.username;
     const password = req.body.password;
-
+    
     if (!username || !password) {
-      return res.status(400).json({ message: "Username and password are required" });
+      throw res.status(400).json({ message: "Username and password are required" });
     }
 
     const user = await prisma.user.findFirst({ where: { username: username } })
     const pass = decrypt(user?.password as string)
-    console.log(pass);
     
     if (username === user?.username && password === pass) {
       const token = jwt.sign({ id: user?.id }, SECRET_KEY as string, { expiresIn: "1h" });
@@ -36,11 +34,10 @@ export const login = async (req: Request, res: Response) => {
       res.cookie("SessionID", token, options);
       return res.status(200).json("Success login");
     } else {
-      return res.status(401).json({ message: "Authentication failed" });
+      throw new HttpException("Authentication failed", 401, null)
+      //throw res.status(401).json({ message: "Authentication failed" });
     }
-  } catch (error) {
-    return res.status(500).json({ message: "Internal server error" });
-  }
+
 }
 
 export const verifyToken = async(req: UserRequest, res: Response, next: NextFunction) => {

@@ -34,7 +34,7 @@ export const getOrder = async (req: Request, res: Response) => {
             id: +req.params.id
         },
         include: {
-            products: true
+            user: true
         }
     })
 
@@ -42,7 +42,20 @@ export const getOrder = async (req: Request, res: Response) => {
         res.status(404).json("Order not found")
     }
 
-    res.json(order)
+    const products = await prisma.productsOnOrder.findMany({
+        where: {
+            orderId : +req.params.id
+        }, 
+        select: {
+            amount: true,
+            product: true
+        } 
+    })
+
+    res.json({
+        order: order,
+        products: products
+    })
 }
 
 export const createOrder = async (req: UserRequest, res: Response) => {

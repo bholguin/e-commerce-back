@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { createOrder, deleteOrder, getOrder, getOrders, getUserOrders, updateOrder } from "../modules/order";
 import { verifyToken } from "../modules/auth";
+import { errorHandler } from "../error-handler";
 
 const router = Router()
 
@@ -50,11 +51,13 @@ const router = Router()
  */
 
 
-router.get("/orders", verifyToken, getOrders)
+router.get("/orders", verifyToken, errorHandler(getOrders))
 /**
  * @swagger
  * /api/orders:
  *  get:
+ *      security:
+ *        - cookieAuth: []
  *      summary: Obtener listado de ordenes
  *      tags:
  *          - Order
@@ -64,7 +67,7 @@ router.get("/orders", verifyToken, getOrders)
  */
 
 
-router.get("/user-orders", verifyToken, getUserOrders)
+router.get("/user-orders", verifyToken, errorHandler(getUserOrders))
 /**
  * @swagger
  * /api/user-orders:
@@ -78,11 +81,13 @@ router.get("/user-orders", verifyToken, getUserOrders)
  */
 
 
-router.get("/order/:id", verifyToken, getOrder)
+router.get("/order/:id", verifyToken, errorHandler(getOrder))
 /**
  * @swagger
  * /api/order/{id}:
  *  get:
+ *      security:
+ *        - cookieAuth: []
  *      summary: Obtener una order por Id
  *      tags:
  *          - Order
@@ -100,11 +105,13 @@ router.get("/order/:id", verifyToken, getOrder)
  *              description: Order not found
  */
 
-router.post("/order", verifyToken, createOrder)
+router.post("/order", verifyToken, errorHandler(createOrder))
 /**
  * @swagger
  * /api/orders:
  *  post:
+ *      security:
+ *        - cookieAuth: []
  *      summary: Crear una nueva Orden
  *      tags:
  *          - Order
@@ -120,11 +127,13 @@ router.post("/order", verifyToken, createOrder)
  *              description: {}
  */
 
-router.delete("/order/:id", verifyToken, deleteOrder)
+router.delete("/order/:id", verifyToken, errorHandler(deleteOrder))
 /**
  * @swagger
  * /api/order/{id}:
  *  delete:
+ *      security:
+ *        - cookieAuth: []
  *      summary: Eliminar una order por Id
  *      tags:
  *          - Order
@@ -142,11 +151,13 @@ router.delete("/order/:id", verifyToken, deleteOrder)
  *              description: Order not found
  */
 
-router.put("/order/:id", verifyToken, updateOrder)
+router.put("/order/:id", verifyToken, errorHandler(updateOrder))
 /**
  * @swagger
  * /api/orders/{id}:
  *  put:
+ *      security:
+ *        - cookieAuth: []
  *      summary: Actualizar una Orden
  *      tags:
  *          - Order
