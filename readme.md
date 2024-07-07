@@ -22,5 +22,5 @@ npm run start
 
 ## Create User
 
-para crear un usuario e interactuar en la aplicacion debes ingresar a `http://localhost:3000/api-docs` y usar el endpoint post `/api/user` 
+para crear un usuario e interactuar en la aplicacion debes crearlo via swagger ingresando a `http://localhost:3000/api-docs` y usando el endpoint post `/api/user` 
 
