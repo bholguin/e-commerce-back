@@ -13,10 +13,14 @@ migrar la base de datos
 ```bash
 npx prisma migrate dev
 ```
-Comandos para correr el proyecto: 
+correr el proyecto: 
 ```bash
 npm run build
 
 npm run start
 ```
+
+## Create User
+
+para crear un usuario e interactuar en la aplicacion debes ingresar a `http://localhost:3000/api-docs` y usar el endpoint post `/api/user` 
 
