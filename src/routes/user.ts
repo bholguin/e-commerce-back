@@ -12,9 +12,6 @@ const router = Router()
  *      UserSchema:
  *          type: object
  *          properties:
- *              id:
- *                  type: number
- *                  description: Id del usuario
  *              firstname:
  *                  type: string
  *                  description: Nombre del usuario

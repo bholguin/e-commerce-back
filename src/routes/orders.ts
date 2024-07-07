@@ -28,9 +28,6 @@ const router = Router()
  *      OrderSchema:
  *          type: object
  *          properties:
- *              id:
- *                  type: number
- *                  description: Id de la Orden
  *              createAt:
  *                  type: string
  *                  format: date

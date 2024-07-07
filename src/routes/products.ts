@@ -12,9 +12,6 @@ const router = Router()
  *      ProductSchema:
  *          type: object
  *          properties:
- *              id:
- *                  type: number
- *                  description: Id de la Orden
  *              name:
  *                  type: string
  *                  description: Nombre del producto
