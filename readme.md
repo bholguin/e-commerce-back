@@ -7,8 +7,13 @@ Aplicación Backend node para aplicar como Front End developer en LinkTIC
 
 una vez clonado el proyecto e instaladas las dependencias usando `npm install` (o `pnpm install` o `yarn`), iniciar el servidor de desarrollo de la siguiente manera:
 
-debes copiar el contenido del archivo `.env-example` a `.env`, luego debe correr los siguientes comandos: 
+debes copiar el contenido del archivo `.env-example` a `.env`. 
 
+migrar la base de datos
+```bash
+npx prisma migrate dev
+```
+Comandos para correr el proyecto: 
 ```bash
 npm run build
 
